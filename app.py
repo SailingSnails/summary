@@ -18,7 +18,7 @@ st.set_page_config(
 alt.themes.enable('dark')
 
 
-전체 = pd.read_excel('/Users/js/Desktop/RawData.xlsx')
+전체 = pd.read_excel('RawData.xlsx')
 
 
 #폰트 설정

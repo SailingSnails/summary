@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -17,7 +18,7 @@ st.set_page_config(
 alt.themes.enable('dark')
 
 
-전체 = pd.read_excel('RawData.xlsx')
+전체 = pd.read_excel('/Users/js/Desktop/RawData.xlsx')
 
 
 #폰트 설정
@@ -104,9 +105,7 @@ else:
 df_selected_year = df_selected_year.copy()
 df_selected_year['날짜'] = pd.to_datetime(df_selected_year['날짜'])
 
-df_selected_year['가격'] = pd.to_numeric(df_selected_year['가격'], errors='coerce')
-df_selected_year['가격'] = df_selected_year['가격'].fillna(0)
-df_selected_year['가격'] = df_selected_year['가격'].astype(int)
+df_selected_year['가격'] = df_selected_year['가격'].replace(',', '', regex=True)
 
 df_selected_year['년도'] = df_selected_year['날짜'].dt.year
 df_selected_year['월'] = df_selected_year['날짜'].dt.month
@@ -671,4 +670,8 @@ with right:
             theme='streamlit',
             gridOptions=show_grid.build()
         )
+
+
+print(df_selected_year['가격'].isnull().sum())  # NaN 값 개수 출력
+print(df_selected_year['가격'].unique())  # 유니크한 값들 출력
 

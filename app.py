@@ -105,6 +105,10 @@ df_selected_year = df_selected_year.copy()
 df_selected_year['날짜'] = pd.to_datetime(df_selected_year['날짜'])
 df_selected_year['가격'] = df_selected_year['가격'].replace(',', '', regex=True).astype(int)
 
+df_selected_year['가격'] = pd.to_numeric(df_selected_year['가격'], errors='coerce')
+df_selected_year['가격'] = df_selected_year['가격'].fillna(0)
+df_selected_year['가격'] = df_selected_year['가격'].astype(int)
+
 df_selected_year['년도'] = df_selected_year['날짜'].dt.year
 df_selected_year['월'] = df_selected_year['날짜'].dt.month
 

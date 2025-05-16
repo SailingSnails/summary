@@ -18,12 +18,14 @@ st.set_page_config(
 
 
 font_path = './fonts/Freesentation-6SemiBold.ttf'
+fm.fontManager.addfont(font_path)
 fontprop = fm.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = fontprop.get_name()
 
 
 URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
 전체 = pd.read_excel(URL)
+
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------

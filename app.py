@@ -17,8 +17,8 @@ st.set_page_config(
 alt.themes.enable('dark')
 plt.rcParams['font.family'] = 'AppleGothic'
 
-
-전체 = pd.read_excel('https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx')
+URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
+전체 = pd.read_excel(URL)
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ ax.pie(
 
 #총 횟수
 올해횟수 = 장르['횟수'].sum()
-data = pd.read_excel('/Users/js/Desktop/RawData.xlsx')
+data = pd.read_excel(URL)
 작년횟수 = data[data['날짜'].dt.year == (selected_year-1)].shape[0]
 차이 = 올해횟수 - 작년횟수
 
@@ -403,7 +403,7 @@ ax.pie(
 
 #총 횟수
 올해극 = 회전['극'].sum()
-data = pd.read_excel('/Users/js/Desktop/RawData.xlsx')
+data = pd.read_excel(URL)
 작년극 = data[data['날짜'].dt.year == (selected_year-1)]['극'].nunique()
 차이 = 올해극 - 작년극
 

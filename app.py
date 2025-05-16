@@ -18,7 +18,7 @@ st.set_page_config(
     layout = 'wide')
 
 
-URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
+URL = 'https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx'
 전체 = pd.read_excel(URL)
 
 
@@ -37,7 +37,7 @@ def get_font_base64(font_path):
     with open(font_path, 'rb') as f:
         return base64.b64encode(f.read()).decode()
 
-font_base64 = get_font_base64('./fonts/Freesentation-6SemiBold.ttf')
+font_base64 = get_font_base64(font_path)
 
 st.markdown(
     f"""
@@ -49,7 +49,7 @@ st.markdown(
         font-style: normal;
     }}
 
-    html, body, [class*="css"] {{
+    html, body, .stApp, div, p, span, section, label, button {{
         font-family: 'Freesentation', sans-serif !important;
     }}
     </style>
@@ -108,7 +108,7 @@ if selected_option == '전체':
     ''
 else:
     with col3:
-        col_btn1, col_btn2 = st.columns([1, 3.4])
+        col_btn1, col_btn2 = st.columns([1, 3.8])
 
         with col_btn1:
             st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
@@ -372,11 +372,11 @@ else:
 
 
 if selected_option == '전체': 
-    ax.text(0,0.0,f'{올해횟수}회', ha='center', va='center', fontsize = 40, fontweight = 'bold', color = 'white')
+    ax.text(0,-0.02,f'{올해횟수}회', ha='center', va='center', fontsize = 44, fontweight = 'bold', color = 'white')
     ''
 else:
-    ax.text(0,-0.25,차이표시, ha='center', va='center', fontsize = 18, fontweight = 'bold', color = 색상)
-    ax.text(0,0.05,f'{올해횟수}회', ha='center', va='center', fontsize = 40, fontweight = 'bold', color = 'white')
+    ax.text(0,0.04,f'{올해횟수}회', ha='center', va='center', fontsize = 44, fontweight = 'bold', color = 'white')
+    ax.text(0,-0.26,차이표시, ha='center', va='center', fontsize = 20, fontweight = 'bold', color = 색상)
 
 
 #legend
@@ -413,7 +413,7 @@ for x in nth_list:
 회전 = pd.DataFrame(nth)
 
 
-#장르 도넛 차트
+#회전 도넛 차트
 fig2, ax = plt.subplots(figsize = (5,5))
 fig2.patch.set_facecolor('none')
 
@@ -456,11 +456,11 @@ else:
 
 
 if selected_option == '전체': 
-    ax.text(0,0,f'{올해극}극', ha='center', va='center', fontsize = 40, fontweight = 'bold', color = 'white')
+    ax.text(0,-0.02,f'{올해극}극', ha='center', va='center', fontsize = 44, fontweight = 'bold', color = 'white')
     ''
 else:
-    ax.text(0,0.05,f'{올해극}극', ha='center', va='center', fontsize = 40, fontweight = 'bold', color = 'white')
-    ax.text(0,-0.25,차이표시, ha='center', va='center', fontsize = 18, fontweight = 'bold', color = 색상)
+    ax.text(0,0.04,f'{올해극}극', ha='center', va='center', fontsize = 44, fontweight = 'bold', color = 'white')
+    ax.text(0,-0.26,차이표시, ha='center', va='center', fontsize = 20, fontweight = 'bold', color = 색상)
 
 
 #legend
@@ -478,7 +478,7 @@ ax.legend(
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-#본사극 분석
+#시즌
 창작초 = df_selected_year['시즌'].str.contains('창작 초연|창작 트아').sum()
 창작재 = df_selected_year['시즌'].str.contains('창작 재연').sum()
 창작삼 = df_selected_year['시즌'].str.contains('창작').sum() - 창작초 - 창작재
@@ -525,7 +525,7 @@ p3 = ax3.barh(labels, [창작_values[2], 라센_values[2]], bar_width,
              label='삼연 이상', color='#A4FBA6', edgecolor='#3B3838', linewidth=2)
 
 ax3.set_ylim(-0.5, len(labels)-0.5)
-ax3.set_yticklabels([label + '  ' for label in labels], color='#D9D9D9', fontsize=15, fontweight='bold')
+ax3.set_yticklabels([label + '  ' for label in labels], color='#D9D9D9', fontsize=18, fontweight='bold')
 ax3.invert_yaxis()
 
 
@@ -533,7 +533,7 @@ ax3.invert_yaxis()
 ax3.legend(
     ['초연', '재연', '삼연+'],
     loc = 'lower center',
-    bbox_to_anchor = (0.5, -0.345),
+    bbox_to_anchor = (0.5, -0.322),
     ncol = len(categories),
     frameon = False,
     fontsize = 14,
@@ -549,7 +549,7 @@ for p in [p1, p2, p3]:
         labels=custom_labels,
         label_type='center',
         color='#4D4D4D',
-        fontsize=11,
+        fontsize=12,
         fontweight='bold'
     )
 
@@ -602,16 +602,7 @@ else:
 if selected_option == '전체': 
     배우_text = f'<p style="font-size: 17px;">{"&nbsp;" * 2}{배우.shape[0]}명</p>'
 else:
-    배우_text = f'<p style="font-size: 17px;">{"&nbsp;" * 2}{배우.shape[0]}명  (<span style="font-size: 12px; color: {색상};">{차이표시}</span>)</p>'
-
-
-
-#Column width
-actor_grid = GridOptionsBuilder.from_dataframe(배우)
-
-actor_grid.configure_column('배우', width=140, filter=True) 
-actor_grid.configure_column('횟수', width=80)
-actor_grid.configure_column('필모', width=80)
+    배우_text = f'<p style="font-size: 17px;">{"&nbsp;" * 2}{배우.shape[0]}명  (<span style="font-size: 13px; color: {색상};">{차이표시}</span>)</p>'
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -638,13 +629,6 @@ show_list = df_selected_year['극'].unique()
 극_text = f'<p style="font-size: 17px;">{"&nbsp;" * 2}: 연극 {연극_극수}극, 뮤지컬 {뮤지컬_극수}극{기타_항목}</p>'
 
 
-
-show_grid = GridOptionsBuilder.from_dataframe(극)
-
-show_grid.configure_column('극', width=220, filter=True) 
-show_grid.configure_column('횟수', width=80)
-
-
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if selected_option == '전체': 
@@ -653,25 +637,52 @@ else:
     텍스트 = '월별 정산'
 
 
+#Column Style
+actor_grid = GridOptionsBuilder.from_dataframe(배우)
+
+act_col = ['배우', '횟수', '필모']
+for col in act_col:
+    actor_grid.configure_column(
+        col,
+        width=160 if col == '배우' else 70,
+        filter=True,
+        cellStyle={"fontFamily": "Freesentation, sans-serif"},
+        headerStyle={"fontFamily": "Freesentation, sans-serif"}
+    )
+
+
+show_grid = GridOptionsBuilder.from_dataframe(극)
+
+show_col = ['극', '횟수']
+for col in show_col:
+    show_grid.configure_column(
+        col,
+        width=230 if col == '극' else 70,
+        filter=True,
+        cellStyle={"fontFamily": "Freesentation, sans-serif"},
+        headerStyle={"fontFamily": "Freesentation, sans-serif"}
+    )
+
+
 # Layout
 left, right = st.columns([3, 2])
 
 with left:
 
     with st.container():
-        st.markdown(f'<p style="font-size: 20px;">《 {텍스트} 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 {텍스트} 》</p>', unsafe_allow_html=True)
         st.pyplot(fig0)
         st.markdown(f'<div style="height:10px"></div>', unsafe_allow_html=True)
 
     left_col1, left_col2, left_col3 = st.columns(3)
     with left_col1:
-        st.markdown(f'<p style="font-size: 20px;">《 장르 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 장르 》</p>', unsafe_allow_html=True)
         st.pyplot(fig)
     with left_col2:
-        st.markdown(f'<p style="font-size: 20px;">《 회전 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 회전 》</p>', unsafe_allow_html=True)
         st.pyplot(fig2)
     with left_col3:
-        st.markdown(f'<p style="font-size: 20px;">《 시즌 》</span></p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 시즌 》</span></p>', unsafe_allow_html=True)
         st.pyplot(fig3)
     
 
@@ -680,7 +691,7 @@ fixed_height = 555
 with right:
     right_up1, right_up2 = st.columns(2)
     with right_up1:
-        st.markdown(f'<p style="font-size: 20px;">《 배우 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 배우 》</p>', unsafe_allow_html=True)
         st.markdown(배우_text, unsafe_allow_html=True)
         AgGrid(
             배우,
@@ -690,7 +701,7 @@ with right:
             gridOptions=actor_grid.build()
         )
     with right_up2:
-        st.markdown(f'<p style="font-size: 20px;">《 작품 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 22px;">《 작품 》</p>', unsafe_allow_html=True)
         st.markdown(극_text, unsafe_allow_html=True)
         AgGrid(
             극,

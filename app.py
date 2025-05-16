@@ -68,7 +68,7 @@ display_list = ['전체'] + [f"{year}년 관극 정산" for year in year_list]
 
 col1, col2, col3 = st.columns([1, 1, 1])
 with col2:
-    selected_option = st.selectbox('', display_list, index=0)
+    selected_option = st.selectbox(' ', display_list, index=0)
 
 
 tbl_review = {
@@ -525,6 +525,7 @@ p3 = ax3.barh(labels, [창작_values[2], 라센_values[2]], bar_width,
              label='삼연 이상', color='#A4FBA6', edgecolor='#3B3838', linewidth=2)
 
 ax3.set_ylim(-0.5, len(labels)-0.5)
+ax3.set_yticks(y)
 ax3.set_yticklabels([label + '  ' for label in labels], color='#D9D9D9', fontsize=18, fontweight='bold')
 ax3.invert_yaxis()
 

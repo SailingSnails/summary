@@ -546,11 +546,7 @@ for x in actor_list:
                           ordered=True)
 
 배우 = 배우.sort_values(by=['횟수', '필모', '배우'], ascending=[False, False, True])
-
-배우['배우'] = 배우['배우'].apply(lambda x: x.replace('_', ' ') if '_' in x else x)
-배우['배우'] = 배우['배우'].apply(lambda x: x.replace('[', ' [') if '[' in x else x)
-배우['배우'] = 배우['배우'].apply(lambda x: x.replace('(', ' (') if '(' in x else x)
-
+배우['배우'] = 배우['배우'].apply(lambda x: x.replace('_', ' ').replace('[', ' [').replace('(', ' ('))
 
 actor_diff = 배우.shape[0] - df_year_before['캐슷'].str.strip().str.split(' ').explode().nunique()
 
@@ -666,8 +662,3 @@ with right:
             theme='streamlit',
             gridOptions=show_grid.build()
         )
-
-
-print(df_selected_year['가격'].isnull().sum())  # NaN 값 개수 출력
-print(df_selected_year['가격'].unique())  # 유니크한 값들 출력
-

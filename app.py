@@ -12,17 +12,13 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 
 st.set_page_config(
     page_title = '관극 정산',
-    layout = 'wide'
-)
+    layout = 'wide')
 
 alt.themes.enable('dark')
-
-
-전체 = pd.read_excel('RawData.xlsx')
-
-
-#폰트 설정
 plt.rcParams['font.family'] = 'AppleGothic'
+
+
+전체 = pd.read_excel('https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx')
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,7 +167,7 @@ if selected_option == '전체':
     극 = 연별정산['극'].values
     비용 = 연별정산['비용'].values
 else:
-    x = np.arange(1, 13)  # 1~12
+    x = np.arange(1, 13)
     x_labels = [f'\n{m}월' for m in x]
     횟수 = 월별정산['횟수'].values
     극 = 월별정산['극'].values
@@ -307,7 +303,7 @@ ax.pie(
     radius=1,
     colors=['#228B22','#5DC35D','#A4FBA6'],
     pctdistance=0.82,
-    wedgeprops=dict( #각 조각 설정
+    wedgeprops=dict(
         width=0.35,
         edgecolor='#3B3838',
         linewidth=2
@@ -392,7 +388,7 @@ ax.pie(
     radius=1,
     colors=['#228B22','#5DC35D','#A4FBA6'],
     pctdistance=0.82,
-    wedgeprops=dict( #각 조각 설정
+    wedgeprops=dict(
         width=0.35,
         edgecolor='#3B3838',
         linewidth=2
@@ -636,10 +632,10 @@ with left:
 
     left_col1, left_col2, left_col3 = st.columns(3)
     with left_col1:
-        st.markdown(f'<p style="font-size: 20px;">《 장르 비율 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 20px;">《 장르 》</p>', unsafe_allow_html=True)
         st.pyplot(fig)
     with left_col2:
-        st.markdown(f'<p style="font-size: 20px;">《 회전률 》</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 20px;">《 회전 》</p>', unsafe_allow_html=True)
         st.pyplot(fig2)
     with left_col3:
         st.markdown(f'<p style="font-size: 20px;">《 시즌 》</span></p>', unsafe_allow_html=True)

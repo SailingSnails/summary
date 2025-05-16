@@ -5,6 +5,7 @@ import numpy as np
 import altair as alt
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import base64
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
@@ -17,15 +18,44 @@ st.set_page_config(
     layout = 'wide')
 
 
+URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
+전체 = pd.read_excel(URL)
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#폰트
+
 font_path = './fonts/Freesentation-6SemiBold.ttf'
 fm.fontManager.addfont(font_path)
 fontprop = fm.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = fontprop.get_name()
 
 
-URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
-전체 = pd.read_excel(URL)
+def get_font_base64(font_path):
+    with open(font_path, 'rb') as f:
+        return base64.b64encode(f.read()).decode()
 
+font_base64 = get_font_base64('./fonts/Freesentation-6SemiBold.ttf')
+
+st.markdown(
+    f"""
+    <style>
+    @font-face {{
+        font-family: 'Freesentation';
+        src: url('data:font/ttf;base64,{font_base64}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }}
+
+    html, body, [class*="css"] {{
+        font-family: 'Freesentation', sans-serif !important;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------

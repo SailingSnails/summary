@@ -4,18 +4,23 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 from st_aggrid import AgGrid, GridOptionsBuilder
  
 
+alt.themes.enable('dark')
 st.set_page_config(
     page_title = '관극 정산',
     layout = 'wide')
 
-alt.themes.enable('dark')
-plt.rcParams['font.family'] = 'AppleGothic'
+
+font_path = './fonts/Freesentation-6SemiBold.ttf'
+fontprop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = fontprop.get_name()
+
 
 URL = "https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx"
 전체 = pd.read_excel(URL)

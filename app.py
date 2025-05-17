@@ -9,11 +9,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 from st_aggrid import AgGrid, GridOptionsBuilder
- 
 
-alt.themes.enable('dark')
-st.set_page_config(page_title='관극 정산', layout='wide')
-col_or = ['#228B22', '#5DC35D', '#A4FBA6']
 
 #URL
 URL = 'https://github.com/SailingSnails/summary/raw/refs/heads/main/RawData.xlsx'
@@ -42,6 +38,21 @@ cast_URL = {
 }
 
 회전극_링크 = "https://x.com/playnmusical_Q/status/1900853298317742414"
+
+
+#Setting
+alt.themes.enable('dark')
+st.set_page_config(page_title='관극 정산', layout='wide')
+color_presets = {
+    'default': ['#A13E4A', '#C56874', '#E9A8AE'],
+    2019: ['#FD6666', '#FEA3A3', '#FFDFDF'],
+    2020: ['#4A7FB0', '#5B9BD5', '#ADC6E5'],
+    2021: ['#666666', '#888888', '#BABABA'],
+    2022: ['#E68AA9', '#FFA0C5', '#FFD1D4'],
+    2023: ['#703C3C', '#8E5656', '#C49A9A'],
+    2024: ['#228B22', '#5DC35D', '#A4FBA6'],
+    2025: ['#9258A8', '#BD7CCF', '#D9B3E6'],
+}
 
 
 #Font
@@ -111,6 +122,12 @@ with col3:
             st.link_button("후기", 후기_링크)
 
 
+if is_all:
+    col_or = color_presets.get('default')
+else:
+    col_or = color_presets.get(selected_year, color_presets['default'])  # fallback to default if year not in dict
+
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -176,7 +193,7 @@ for xi, y in zip(x, 극):
 
 #비용
 ax01 = ax0.twinx()
-ax01.plot(x, 비용, color='#C0C0C0', linewidth=2.25, zorder=4)
+ax01.plot(x, 비용, color=col_or[2], linewidth=2.25, zorder=4)
 ax01.set_ylim(bottom=0)
 
 #Axis

@@ -7,6 +7,9 @@ import base64
 
 alt.themes.enable('dark')
 st.set_page_config(page_title='검색', layout='wide')
+with st.sidebar:
+    with st.expander("메뉴", expanded=False):
+        st.write(' ')
 
 
 # URL

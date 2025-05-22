@@ -43,6 +43,7 @@ cast_URL = {
 #Setting
 alt.themes.enable('dark')
 st.set_page_config(page_title='관극 정산', layout='wide')
+st.set_page_config(initial_sidebar_state="collapsed")
 color_presets = {
     'default': ['#A13E4A', '#C56874', '#E9A8AE'],
     2019: ['#FD6666', '#FEA3A3', '#FFDFDF'],
